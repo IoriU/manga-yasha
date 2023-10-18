@@ -1,0 +1,1 @@
+kenapa tu kira-kira
