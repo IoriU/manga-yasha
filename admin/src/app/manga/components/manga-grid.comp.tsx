@@ -19,13 +19,6 @@ const MangaGridComp = () => {
   );
 };
 
-type Manga = {
-  title: string;
-  description: string;
-  image: string;
-  latestChapter: string;
-};
-
 const MangaList: Manga[] = [
   {
     title: "One Piece",
