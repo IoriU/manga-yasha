@@ -10,15 +10,15 @@ declare global {
   }
 
   interface Manga {
-    id: string;
+    id?: string;
     title: string;
     description?: string;
     image: string;
     latestChapter: string;
-    releaseDate: string;
-    status: string;
-    genres: string[];
-    chapters: ChapterManga[];
+    releaseDate?: string;
+    status?: string;
+    genres?: string[];
+    chapters?: ChapterManga[];
   }
 
   interface SearchManga {
