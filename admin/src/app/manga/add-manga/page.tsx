@@ -4,13 +4,19 @@ import MyInputFieldIcon from "@/app/components/input-icon.comp";
 import { FaPlus } from "react-icons/fa";
 import React from "react";
 import Spinner from "./Spinner";
+import MangaSearchCard from "./components/manga-search-card.comp";
+import Image from "next/image";
 
 const AddManga = () => {
   const [resultManga, setResultManga] = React.useState<SearchManga[]>([]);
+  const [manga, setManga] = React.useState<Manga>();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const onSearch = async (event: React.FormEvent, searchData: string) => {
     event.preventDefault();
+
+    if (manga) setManga(undefined);
+
     setIsLoading(true);
     await fetch(`https://api.consumet.org/manga/mangadex/${searchData}}`)
       .then((res) => res.json())
@@ -22,12 +28,18 @@ const AddManga = () => {
           return [
             ...prevManga,
             ...data.results.map((manga: any) => ({
+              id: manga.id,
               title: manga.title,
             })),
           ];
         });
       });
     setIsLoading(false);
+  };
+
+  const onSearchClick = (selectedManga: Manga) => {
+    setManga(selectedManga);
+    //console.log(selectedManga);
   };
 
   return (
@@ -60,18 +72,21 @@ const AddManga = () => {
           <div className="flex h-80 w-full justify-center items-center">
             <Spinner />
           </div>
+        ) : !isLoading && manga ? (
+          <div className="flex flex-row">
+            <Image width={50} height={50} alt="manga-image" src={manga.image} />
+            <h1>KANAN</h1>
+          </div>
         ) : (
           <div className="rounded-md shadow-inner">
-            {resultManga.map((manga, mangaIdx) => {
-              console.log(resultManga.length);
+            {resultManga.map((manga) => {
               return (
                 // Manga Search Result Card
-                <div
-                  className="hover:bg-blue-100 p-2 cursor-pointer text-other"
-                  key={mangaIdx}
-                >
-                  <h1>{manga.title}</h1>
-                </div>
+                <MangaSearchCard
+                  onSearchClick={onSearchClick}
+                  key={manga.id}
+                  {...manga}
+                />
               );
             })}
           </div>

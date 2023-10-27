@@ -3,11 +3,11 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-interface MyInputFieldIconProps extends React.HTMLAttributes<HTMLDivElement> {
+interface InputFieldIconProps extends React.HTMLAttributes<HTMLDivElement> {
   onSearch: (event: React.FormEvent, searchData: string) => void;
 }
 
-const MyInputFieldIcon: React.FC<MyInputFieldIconProps> = (props) => {
+const InputFieldIcon: React.FC<InputFieldIconProps> = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   https: return (
@@ -36,4 +36,4 @@ const MyInputFieldIcon: React.FC<MyInputFieldIconProps> = (props) => {
   );
 };
 
-export default MyInputFieldIcon;
+export default InputFieldIcon;
