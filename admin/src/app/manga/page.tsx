@@ -1,9 +1,9 @@
 import { FaPlus, FaSearch, FaEdit, FaTrash, FaAngleDown } from "react-icons/fa";
 import MyButton from "../components/button.comp";
 import MyInputField from "../components/input.comp";
-import Image from "next/image";
-import MangaFilterComp from "./components/manga.filter.comp";
-import MangaGridComp from "./components/manga.grid.comp";
+import MangaFilterComp from "./components/manga-filter.comp";
+import MangaGridComp from "./components/manga-grid.comp";
+import Link from "next/link";
 
 export default function Manga() {
   return (
@@ -21,13 +21,13 @@ export default function Manga() {
           </div>
 
           {/* Add Manga */}
-          <div className="flex w-full justify-end">
+          <Link className="flex w-full justify-end" href="/manga/add-manga">
             <MyButton
               color="bg-blue-500 hover:bg-blue-600 active:bg-blue-500"
               title="Add Manga"
               icon={<FaPlus size={14} />}
             />
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -35,10 +35,22 @@ export default function Manga() {
       <span className="flex mx-4 border-b bg-gra" />
 
       {/* Filter Manga List */}
-      <MangaFilterComp />
+      <div className="flex flex-row space-x-2 mx-4 my-2">
+        <MangaFilterComp items={sortItems} title="Sort" />
+        <MangaFilterComp items={orderItems} title="Order" />
+      </div>
 
       {/* Manga List */}
       <MangaGridComp />
     </div>
   );
 }
+
+const sortItems = [
+  { name: "Title" },
+  { name: "Author" },
+  { name: "Latest Chapter" },
+  { name: "Date Added" },
+];
+
+const orderItems = [{ name: "Ascending" }, { name: "Descending" }];

@@ -3,11 +3,17 @@ import { Listbox, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
-const MangaFilterComp = () => {
-  const [selected, setSelected] = useState(sortBy[0]);
+interface MangaFilterCompProps extends React.HTMLAttributes<HTMLDivElement> {
+  title: string;
+  items: { name: string }[];
+}
+
+const MangaFilterComp: React.FC<MangaFilterCompProps> = (props) => {
+  const [selected, setSelected] = useState(props.items[0]);
 
   return (
-    <div className="m-4 my-1 w-72">
+    <div className="flex flex-col w-72">
+      <strong className="text-text text-base font-[600]">{props.title}</strong>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -29,15 +35,15 @@ const MangaFilterComp = () => {
             enterTo="opacity-100"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {sortBy.map((person, personIdx) => (
+              {props.items.map((item, itemIdx) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={itemIdx}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-blue-200 text-blue-900" : "text-other"
                     }`
                   }
-                  value={person}
+                  value={item}
                 >
                   {({ selected }) => (
                     <>
@@ -46,7 +52,7 @@ const MangaFilterComp = () => {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {person.name}
+                        {item.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
@@ -64,12 +70,5 @@ const MangaFilterComp = () => {
     </div>
   );
 };
-
-const sortBy = [
-  { name: "Title" },
-  { name: "Author" },
-  { name: "Latest Chapter" },
-  { name: "Date Added" },
-];
 
 export default MangaFilterComp;
