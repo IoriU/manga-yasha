@@ -3,18 +3,11 @@
 export {};
 
 declare global {
-  interface IPost {
-    id: number;
-    title: string;
-    body: string;
-  }
-
   interface Manga {
     id: string;
     title: string;
     description?: string;
     image: string;
-    latestChapter: string;
     releaseDate: string;
     status: string;
     genres: string[];
