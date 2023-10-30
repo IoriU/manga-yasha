@@ -17,7 +17,7 @@ const InputFieldCustom: React.FC<InputFieldCustomProps> = (props) => {
   const baseStyle =
     "w-full p-2 transition-all duration-300 text-sm overflow-auto rounded-md border-none text-black focus:outline-none focus:ring-2 focus:ring-green- ";
   return (
-    <>
+    <div>
       <span className="font-semibold text-sm">{props.title}</span>
       <div className="border relative border-gray-400 rounded-md  ">
         {!props.type || props.type === "text" ? (
@@ -40,15 +40,23 @@ const InputFieldCustom: React.FC<InputFieldCustomProps> = (props) => {
                   {option.value}
                 </option>
               );
-            })}{" "}
+            })}
           </select>
+        ) : props.type === "textarea" ? (
+          <textarea
+            value={props.value}
+            onChange={(e) => props.onChange(e.target.value)}
+            placeholder={props.placeholder}
+            className={baseStyle + "bg-transparent"}
+            rows={5}
+          />
         ) : null}
       </div>
 
       <div className="flex absolute right-4 top-3 ">
         <FaSearch size={18} />
       </div>
-    </>
+    </div>
   );
 };
 

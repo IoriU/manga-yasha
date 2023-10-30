@@ -6,7 +6,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 interface MangaCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   image: string;
-  latestChapter: string;
+  latestChapter?: string;
 }
 
 const MangaCard: React.FC<MangaCardProps> = (props) => {

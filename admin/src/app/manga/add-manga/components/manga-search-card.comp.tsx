@@ -26,7 +26,7 @@ const MangaSearchCard: React.FC<SearchMangaProps> = (props) => {
           title: data.title,
           description: data.description?.en,
           image: data.image,
-          latestChapter: data.chapters.length,
+
           releaseDate: data.releaseDate,
           status: data.status,
           genres: data.genres,
@@ -66,7 +66,7 @@ const MangaSearchCard: React.FC<SearchMangaProps> = (props) => {
             </h2>
           ))}
         </div>
-        <h2 className="text-sm">{`Chapter: ${manga?.latestChapter}`}</h2>
+        <h2 className="text-sm">{`Chapter: ${manga?.chapters.length}`}</h2>
       </div>
     </div>
   );

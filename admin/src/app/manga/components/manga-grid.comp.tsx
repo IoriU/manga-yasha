@@ -8,12 +8,7 @@ const MangaGridComp = () => {
   return (
     <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2  ">
       {MangaList.map((manga) => (
-        <MangaCard
-          key={manga.title}
-          title={manga.title}
-          image={manga.image}
-          latestChapter={manga.latestChapter}
-        />
+        <MangaCard key={manga.title} title={manga.title} image={manga.image} />
       ))}
     </div>
   );
@@ -25,7 +20,7 @@ const MangaList: Manga[] = [
     description: "Luffy and his crew",
     image:
       "https://i.pinimg.com/originals/04/65/2b/04652b44ea7c1275d1022d98d59ecc97.jpg",
-    latestChapter: "1002",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",
@@ -36,7 +31,7 @@ const MangaList: Manga[] = [
     title: "Naruto",
     description: "Luffy and his crew",
     image: "https://static.wikia.nocookie.net/naruto/images/6/63/Artbook_2.png",
-    latestChapter: "552",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",
@@ -48,7 +43,7 @@ const MangaList: Manga[] = [
     description: "Luffy and his crew",
     image:
       "https://i.pinimg.com/originals/9f/a5/a8/9fa5a8848a411d90217ff07b865cc1a3.jpg",
-    latestChapter: "342",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",
@@ -60,7 +55,7 @@ const MangaList: Manga[] = [
     description: "Luffy and his crew",
     image:
       "https://i.pinimg.com/originals/f4/94/f3/f494f3934e4dfe56c043d987f8c9f9ff.jpg",
-    latestChapter: "672",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",
@@ -72,7 +67,7 @@ const MangaList: Manga[] = [
     description: "Luffy and his crew",
     image:
       "https://i.pinimg.com/736x/16/b9/8b/16b98be295259483e96aaaf8187cc3f6.jpg",
-    latestChapter: "270",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",
@@ -84,7 +79,7 @@ const MangaList: Manga[] = [
     description: "Luffy and his crew",
     image:
       "https://i.pinimg.com/originals/04/65/2b/04652b44ea7c1275d1022d98d59ecc97.jpg",
-    latestChapter: "1002",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",
@@ -96,7 +91,7 @@ const MangaList: Manga[] = [
     description: "Luffy and his crew",
     image:
       "https://i.pinimg.com/originals/04/65/2b/04652b44ea7c1275d1022d98d59ecc97.jpg",
-    latestChapter: "1002",
+
     id: "1",
     releaseDate: "2021-02-02",
     status: "Ongoing",

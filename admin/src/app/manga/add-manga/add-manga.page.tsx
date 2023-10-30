@@ -46,12 +46,11 @@ const AddManga = () => {
 
   const onSearchClick = (selectedManga: Manga) => {
     setManga(selectedManga);
-
-    //console.log(selectedManga);
   };
 
   const handleAddManga = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(manga);
   };
 
   return (
@@ -85,22 +84,54 @@ const AddManga = () => {
             <Spinner />
           </div>
         ) : !isLoading && manga ? (
-          <div className="flex flex-row">
-            <Image width={50} height={50} alt="manga-image" src={manga.image} />
-            <div className="flex flex-col w-full">
-              <form onSubmit={handleAddManga} action="">
-                <InputFieldCustom
-                  title="ID"
-                  placeholder="Manga ID"
-                  value={manga.id}
-                  onChange={(value) => setManga({ ...manga, id: value })}
+          // || ADD MANGA SECTION || \\
+
+          <div className="flex flex-col">
+            <form onSubmit={handleAddManga} action="">
+              {/* UPPER SECTION */}
+              <div className="flex flex-row">
+                <Image
+                  className=" h-64 rounded-md shadow-md m-2"
+                  width={200}
+                  height={200}
+                  alt="manga-image"
+                  src={manga.image}
                 />
-                <InputFieldCustom
-                  title="Title"
-                  placeholder="Manga Title"
-                  value={manga.title}
-                  onChange={(value) => setManga({ ...manga, title: value })}
-                />
+                <div className="flex flex-1 flex-col w-full space-y-2">
+                  <InputFieldCustom
+                    title="ID"
+                    placeholder="Manga ID"
+                    value={manga.id}
+                    onChange={(value) => setManga({ ...manga, id: value })}
+                  />
+                  <InputFieldCustom
+                    title="Title"
+                    placeholder="Manga Title"
+                    value={manga.title}
+                    onChange={(value) => setManga({ ...manga, title: value })}
+                  />
+
+                  <InputFieldCustom
+                    title="Release Date"
+                    placeholder="Manga Release Date"
+                    value={manga.releaseDate}
+                    onChange={(value) =>
+                      setManga({ ...manga, releaseDate: value })
+                    }
+                  />
+                  <InputFieldCustom
+                    title="Status"
+                    placeholder="Status"
+                    value={manga.status}
+                    onChange={(value) => setManga({ ...manga, status: value })}
+                    type="select"
+                    options={[{ value: "Ongoing" }, { value: "Completed" }]}
+                  />
+                </div>
+              </div>
+
+              {/* LOWER SECTION */}
+              <div className="flex flex-col w-ful space-y-2">
                 <InputFieldCustom
                   title="Description"
                   placeholder="Manga Description"
@@ -108,30 +139,21 @@ const AddManga = () => {
                   onChange={(value) =>
                     setManga({ ...manga, description: value })
                   }
-                />
-                <InputFieldCustom
-                  title="Release Date"
-                  placeholder="Manga Release Date"
-                  value={manga.releaseDate}
-                  onChange={(value) =>
-                    setManga({ ...manga, releaseDate: value })
-                  }
-                />
-                <InputFieldCustom
-                  title="Status"
-                  placeholder="Status"
-                  value={manga.status}
-                  onChange={(value) => setManga({ ...manga, status: value })}
-                  type="select"
-                  options={[{ value: "Ongoing" }, { value: "Completed" }]}
+                  type="textarea"
                 />
                 <InputFieldMultiple
-                  placeholder="Set Genre"
+                  placeholder="Add Genre By Pressing Enter"
                   value={manga.genres}
+                  onChange={(value) => {
+                    setManga({ ...manga, genres: value });
+                    console.log(manga.genres);
+                  }}
                 />
-                <button className="w-full bg-red-300">TES BUTTON</button>
-              </form>
-            </div>
+                <button className="bg-fuchsia-600 text-sm p-2 text-white rounded-md">
+                  Submit Manga
+                </button>
+              </div>
+            </form>
           </div>
         ) : (
           <div className="rounded-md shadow-inner">
