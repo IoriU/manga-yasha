@@ -60,13 +60,13 @@ const MangaSearchCard: React.FC<SearchMangaProps> = (props) => {
 
         {/* Manga Genre List */}
         <div className="flex flex-row max-h-10 w-full">
-          {manga?.genres.map((genre, genreIdx) => (
+          {manga?.genres?.map((genre, genreIdx) => (
             <h2 key={genreIdx} className="text-xs font-semibold my-2 mr-2">
               {genre.toUpperCase()}
             </h2>
           ))}
         </div>
-        <h2 className="text-sm">{`Chapter: ${manga?.chapters.length}`}</h2>
+        <h2 className="text-sm">{`Chapter: ${manga?.chapters?.length}`}</h2>
       </div>
     </div>
   );

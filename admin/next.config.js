@@ -7,6 +7,7 @@ const nextConfig = {
       "static.wikia.nocookie.net",
       "mangadex.org",
       "fmcdn.mangahere.com",
+      "uploads.mangadex.org",
     ],
   },
 };

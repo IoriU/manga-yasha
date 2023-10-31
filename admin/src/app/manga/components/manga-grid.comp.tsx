@@ -8,7 +8,11 @@ const MangaGridComp = () => {
   return (
     <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2  ">
       {MangaList.map((manga) => (
-        <MangaCard key={manga.title} title={manga.title} image={manga.image} />
+        <MangaCard
+          key={manga.title!}
+          title={manga.title!}
+          image={manga.image!}
+        />
       ))}
     </div>
   );

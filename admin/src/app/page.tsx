@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <>
       <div>
-        <Link href={"/manga"}>aaaa</Link>
+        <Link href={"/manga"}>
+          Belom ada apa apa di home, langsung ke Manga saja
+        </Link>
       </div>
     </>
   );

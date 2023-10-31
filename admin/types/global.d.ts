@@ -5,13 +5,13 @@ export {};
 declare global {
   interface Manga {
     id: string;
-    title: string;
+    title?: string;
     description?: string;
-    image: string;
-    releaseDate: string;
-    status: string;
-    genres: string[];
-    chapters: ChapterManga[];
+    image?: string;
+    releaseDate?: string;
+    status?: string;
+    genres?: string[];
+    chapters?: ChapterManga[];
   }
 
   interface SearchManga {
@@ -26,5 +26,10 @@ declare global {
     chapterNumber: string;
     volumeNumber?: string;
     pages: number;
+  }
+
+  interface PageManga {
+    img: string;
+    page: number;
   }
 }

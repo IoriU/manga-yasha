@@ -8,6 +8,7 @@ import MangaSearchCard from "./components/manga-search-card.comp";
 import Image from "next/image";
 import InputFieldCustom from "./components/input-custom.comp";
 import InputFieldMultiple from "./components/input-multiple.comp";
+import InputFieldChapter from "./components/input-chapter.comp";
 
 const AddManga = () => {
   const [resultManga, setResultManga] = React.useState<SearchManga[]>([]);
@@ -16,8 +17,7 @@ const AddManga = () => {
 
   //handle add manga input state
   const [manga, setManga] = React.useState<Manga>();
-
-  const [mangaChapter, setMangaChapter] = React.useState("");
+  const [pages, setPages] = React.useState<PageManga[]>([]);
 
   const onSearch = async (event: React.FormEvent, searchData: string) => {
     event.preventDefault();
@@ -44,22 +44,42 @@ const AddManga = () => {
     setIsLoading(false);
   };
 
-  const onSearchClick = (selectedManga: Manga) => {
+  const onSearchClick = async (selectedManga: Manga) => {
+    //Add Manga Database
     setManga(selectedManga);
+
+    //Add Page Database
+    setPages([]);
+    {
+      manga?.chapters?.map(async (chapter) => {
+        await fetch(
+          `https://api.consumet.org/manga/mangadex/read/${chapter.id}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setPages((prev) => {
+              return [...prev, ...data];
+            });
+          });
+      });
+    }
   };
 
   const handleAddManga = (event: React.FormEvent) => {
     event.preventDefault();
     console.log(manga);
+    console.log(pages);
   };
 
   return (
-    <div className="flex flex-col h-full rounded-lg shadow-lg -mt-4 m-4 ">
+    <div className="flex flex-col rounded-lg shadow-lg -mt-4 m-4 ">
       {/* Header Section */}
       <div className="flex flex-col rounded-t-lg bg-blue-400">
         <div className="flex flex-row justify-between p-4">
           <h1 className="text-white text-2xl font-bold">Add Manga</h1>
           <MyButton
+            disabled={manga ? true : false}
+            onClick={() => setManga({ id: "test" })}
             title={"Add Manual"}
             icon={<FaPlus />}
             color={"bg-orange-400"}
@@ -95,7 +115,7 @@ const AddManga = () => {
                   width={200}
                   height={200}
                   alt="manga-image"
-                  src={manga.image}
+                  src={manga.image!}
                 />
                 <div className="flex flex-1 flex-col w-full space-y-2">
                   <InputFieldCustom
@@ -149,13 +169,22 @@ const AddManga = () => {
                     console.log(manga.genres);
                   }}
                 />
+                <InputFieldChapter
+                  onChangeMangaChapter={(value) => {
+                    setManga({ ...manga, chapters: value });
+                  }}
+                  onChangeMangaPages={(value) => {
+                    setPages(value);
+                  }}
+                  value={manga.chapters}
+                />
                 <button className="bg-fuchsia-600 text-sm p-2 text-white rounded-md">
                   Submit Manga
                 </button>
               </div>
             </form>
           </div>
-        ) : (
+        ) : resultManga ? (
           <div className="rounded-md shadow-inner">
             {resultManga.map((manga) => {
               return (
@@ -168,6 +197,8 @@ const AddManga = () => {
               );
             })}
           </div>
+        ) : (
+          <div></div>
         )}
       </div>
     </div>
